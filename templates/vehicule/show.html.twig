@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vehicule{% endblock %}
+
+{% block body %}
+    <h1>Vehicule</h1>
+    <a href="{{ path('app_vehicule_index') }}">Revenir à la liste</a>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ vehicule.id }}</td>
+            </tr>
+            <tr>
+                <th>Marque</th>
+                <td>{{ vehicule.Marque }}</td>
+            </tr>
+            <tr>
+                <th>Immatriculation</th>
+                <td>{{ vehicule.Immatriculation }}</td>
+            </tr>
+            <tr>
+                <th>PrixJournalier</th>
+                <td>{{ vehicule.prixJournalier }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
+                <td>{{ vehicule.Description }}</td>
+            </tr>
+            <tr>
+                <th>Disponibilite</th>
+                <td>{{ vehicule.Disponibilite ? 'Yes' : 'No' }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Commentaires</th>
+                <td>
+                    <ul>
+                        {% for commentaire in vehicule.commentaires %}
+                            <li> {{ commentaire.ecritPar.username }} a commenté {{ commentaire.contenu }}</li>
+                        {% else %}
+                            <li>no records found</li>
+                        {% endfor %}
+                    </ul>
+                </td>
+        </tbody>
+    </table>
+
+
+    <a href-"{{ path('app_reservation_new') }}">Reserver</a>
+
+    <a href="{{ path('app_commentaire_new') }}">Commenter</a>
+
+    {% if is_granted("ROLE_ADMIN") %}
+    <a href="{{ path('app_vehicule_edit', {'id': vehicule.id}) }}">edit</a>
+
+    {{ include('vehicule/_delete_form.html.twig') }}
+    {% endif %}
+{% endblock %}
