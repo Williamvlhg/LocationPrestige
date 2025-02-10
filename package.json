@@ -22,9 +22,10 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@tailwindcss/postcss": "^4.0.4",
+        "@tailwindcss/postcss": "^4.0.6",
+        "autoprefixer": "^10.4.20",
         "postcss": "^8.5.1",
         "postcss-loader": "^8.1.1",
-        "tailwindcss": "^4.0.4"
+        "tailwindcss": "^4.0.6"
     }
 }

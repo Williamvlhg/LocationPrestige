@@ -3,40 +3,53 @@
 {% block title %}Vehicule index{% endblock %}
 
 {% block body %}
-    <h1>Vehicule index</h1>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold text-gray-900 mb-8">Vehicule index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Marque</th>
-                <th>Immatriculation</th>
-                <th>PrixJournalier</th>
-                <th>Description</th>
-                <th>Disponibilite</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for vehicule in vehicules %}
-            <tr>
-                <td>{{ vehicule.id }}</td>
-                <td>{{ vehicule.Marque }}</td>
-                <td>{{ vehicule.Immatriculation }}</td>
-                <td>{{ vehicule.prixJournalier }}</td>
-                <td>{{ vehicule.Description }}</td>
-                <td>{{ vehicule.Disponibilite ? 'Yes' : 'No' }}</td>
-                <td>
-                    <a href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}">show</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="7">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+        <div class="table-container">
+            <table class="data-table">
+                <thead class="table-header">
+                    <tr>
+                        <th>Id</th>
+                        <th>Marque</th>
+                        <th>Immatriculation</th>
+                        <th>Prix Journalier</th>
+                        <th>Description</th>
+                        <th>Disponibilite</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="table-body">
+                {% for vehicule in vehicules %}
+                    <tr class="table-row">
+                        <td class="table-cell">{{ vehicule.id }}</td>
+                        <td class="table-cell">{{ vehicule.Marque }}</td>
+                        <td class="table-cell">{{ vehicule.Immatriculation }}</td>
+                        <td class="table-cell">{{ vehicule.prixJournalier }}€</td>
+                        <td class="table-cell">{{ vehicule.Description }}</td>
+                        <td class="table-cell">
+                            <span class="status-badge {{ vehicule.Disponibilite ? 'status-badge-success' : 'status-badge-error' }}">
+                                {{ vehicule.Disponibilite ? 'Disponible' : 'Non disponible' }}
+                            </span>
+                        </td>
+                        <td class="table-cell-action">
+                            <a href="{{ path('app_vehicule_show', {'id': vehicule.id}) }}" 
+                               class="action-link">Voir détails</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="7" class="table-cell text-center text-gray-500">Aucun véhicule trouvé</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-    <a href="{{ path('app_vehicule_new') }}">Create new</a>
+        <div class="mt-8">
+            <a href="{{ path('app_vehicule_new') }}" class="button-primary">
+                Ajouter un véhicule
+            </a>
+        </div>
+    </div>
 {% endblock %}
